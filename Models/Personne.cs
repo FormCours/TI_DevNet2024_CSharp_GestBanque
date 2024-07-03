@@ -13,5 +13,16 @@ namespace Models
         public string Nom { get; set; }
         public DateTime DateNaiss { get; set; }
         #endregion
+
+        //public string GetPrenom()
+        //{
+        //    return Prenom;
+        //}
+
+        //public void SetPrenom(string value)
+        //{
+        //    value = "toto";
+        //    Prenom = value;
+        //}
     }
 }
