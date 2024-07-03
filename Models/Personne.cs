@@ -14,15 +14,23 @@ namespace Models
         public DateTime DateNaiss { get; set; }
         #endregion
 
-        //public string GetPrenom()
-        //{
-        //    return Prenom;
-        //}
+        
+        public static bool operator ==(Personne? pLeft, Personne? pRight)
+        {
+            if (pLeft is null && pRight is null)
+                return true;
 
-        //public void SetPrenom(string value)
-        //{
-        //    value = "toto";
-        //    Prenom = value;
-        //}
+            if (pLeft is null || pRight is null)
+                return false;
+
+            return pLeft.Prenom == pRight.Prenom
+                && pLeft.Nom == pRight.Nom
+                && pLeft.DateNaiss == pRight.DateNaiss;
+        }
+
+        public static bool operator != (Personne? pLeft, Personne? pRight)
+        {
+            return !(pLeft == pRight);
+        }
     }
 }

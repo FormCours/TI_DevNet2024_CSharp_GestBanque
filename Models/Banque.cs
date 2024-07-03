@@ -8,18 +8,18 @@ namespace Models
 {
     public class Banque
     {
-        private List<Courant> _Courants = new List<Courant>();
+        private Dictionary<string ,Courant> _Courants = new Dictionary<string, Courant>();
         public string Nom { get; set; }
 
         public Courant? this[string numero]
         {
             get
             {
-                foreach ( Courant c in _Courants)
+                foreach (KeyValuePair<string, Courant> kvp in _Courants)
                 {
-                    if(c.Numero == numero)
+                    if(kvp.Key == numero)
                     {
-                        return c;
+                        return kvp.Value;
                     }
                 }
                 return null;
@@ -33,18 +33,41 @@ namespace Models
                 Console.WriteLine($"Le compte numéro : {c.Numero} existe déjà!!!");
                 return;
             }
-            _Courants.Add(c);
+
+            _Courants.Add(c.Numero, c);
         }
 
         public void Supprimer(string numero)
         {
-            Courant? c = this[numero];
-            if( c == null)
+            if(!_Courants.ContainsKey(numero))
             {
                 Console.WriteLine($"Le compte numéro : {numero} n'existe pas!!!");
                 return;
             }
-            _Courants.Remove(c);
+
+            _Courants.Remove(numero);
+        }
+
+
+        // Ajouter une méthode « AvoirDesComptes » à la classe « Banque » recevant en paramètre le titulaire (Personne) qui calculera les avoirs de tous ses comptes en utilisant l’opérateur « + ».
+        public double AvoirDesComptes(Personne titulaire)
+        {
+            Courant temp = new Courant();
+            double result = 0;
+
+            foreach(KeyValuePair<string, Courant> kvp in _Courants)
+            {
+                Courant courant = kvp.Value;
+
+                if(courant.Titulaire == titulaire)
+                {
+                    double montant = temp + courant;
+
+                    result += montant;
+                }
+            }
+
+            return result;
         }
     }
 }

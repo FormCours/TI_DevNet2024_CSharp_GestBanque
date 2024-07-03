@@ -35,13 +35,19 @@ Banque b1 = new Banque();
 b1.Nom = "Les loustics";
 
 b1.Ajouter(c1);
-b1.Ajouter(c1);
 b1.Ajouter(c2);
 b1.Ajouter(c3);
 
 b1.Supprimer("5645");
-
-
 b1["123"]?.Depot(1_000_000);
-string? prenom = b1["123"]?.Titulaire.Prenom.ToLowerInvariant();
-Console.WriteLine(prenom);
+
+
+
+
+Personne pRechercher = new Personne();
+pRechercher.Nom = "Bya";
+pRechercher.Prenom = "Sébastien";
+pRechercher.DateNaiss = new DateTime(1991, 3, 27);
+
+double avoirSeb = b1.AvoirDesComptes(pRechercher);
+Console.WriteLine($"Avoir des comptes de {pRechercher.Prenom} {pRechercher.Nom} est de {avoirSeb}.");

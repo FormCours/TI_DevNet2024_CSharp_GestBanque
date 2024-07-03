@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -66,6 +67,36 @@ namespace Models
         }
         #endregion
 
+        #region Surcharge d'opérateur
+        // Surcharger l’opérateur « + » de la classe « Courant » afin qu’il retourne la somme, de type double, des soldes.
+        // Cependant, les soldes négatifs ne doivent pas être pris en compte.
+        public static double operator +(Courant c1, Courant c2)
+        {
+            double solde1 = Math.Max(c1.Solde, 0);
+            double solde2 = Math.Max(c2.Solde, 0);
 
+            return solde1 + solde2;
+        }
+
+        //public static double operator +(Courant c1, Courant c2)
+        //{
+        //    if (c1.Solde <= 0 && c2.Solde <= 0)
+        //    {
+        //        return 0;
+        //    }
+        //
+        //    if (c1.Solde <= 0)
+        //    {
+        //        return c2.Solde;
+        //    }
+        //
+        //    if (c2.Solde <= 0)
+        //    {
+        //        return c1.Solde;
+        //    }
+        //
+        //    return c1.Solde + c2.Solde;
+        //}
+        #endregion       
     }
 }
