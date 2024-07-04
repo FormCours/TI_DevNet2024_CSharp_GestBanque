@@ -8,14 +8,14 @@ namespace Models
 {
     public class Banque
     {
-        private Dictionary<string ,Courant> _Courants = new Dictionary<string, Courant>();
+        private Dictionary<string ,Compte> _Comptes = new Dictionary<string, Compte>();
         public string Nom { get; set; }
 
-        public Courant? this[string numero]
+        public Compte? this[string numero]
         {
             get
             {
-                foreach (KeyValuePair<string, Courant> kvp in _Courants)
+                foreach (KeyValuePair<string, Compte> kvp in _Comptes)
                 {
                     if(kvp.Key == numero)
                     {
@@ -26,7 +26,7 @@ namespace Models
             }
         }
 
-        public void Ajouter(Courant c)
+        public void Ajouter(Compte c)
         {
             if ( this[c.Numero] != null )
             {
@@ -34,34 +34,34 @@ namespace Models
                 return;
             }
 
-            _Courants.Add(c.Numero, c);
+            _Comptes.Add(c.Numero, c);
         }
 
         public void Supprimer(string numero)
         {
-            if(!_Courants.ContainsKey(numero))
+            if(!_Comptes.ContainsKey(numero))
             {
                 Console.WriteLine($"Le compte numéro : {numero} n'existe pas!!!");
                 return;
             }
 
-            _Courants.Remove(numero);
+            _Comptes.Remove(numero);
         }
 
 
         // Ajouter une méthode « AvoirDesComptes » à la classe « Banque » recevant en paramètre le titulaire (Personne) qui calculera les avoirs de tous ses comptes en utilisant l’opérateur « + ».
         public double AvoirDesComptes(Personne titulaire)
         {
-            Courant temp = new Courant();
+            Compte temp = new Compte();
             double result = 0;
 
-            foreach(KeyValuePair<string, Courant> kvp in _Courants)
+            foreach(KeyValuePair<string, Compte> kvp in _Comptes)
             {
-                Courant courant = kvp.Value;
+                Compte compte = kvp.Value;
 
-                if(courant.Titulaire == titulaire)
+                if(compte.Titulaire == titulaire)
                 {
-                    double montant = temp + courant;
+                    double montant = temp + compte;
 
                     result += montant;
                 }

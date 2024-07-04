@@ -7,16 +7,13 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    public class Courant
+    public class Courant : Compte
     {
         #region Champs
         private double _LigneDeCredit;
         #endregion
 
         #region Propriétés
-        public string Numero { get; set; }
-        public Personne Titulaire { get; set; }
-        public double Solde { get; private set; }
 
         public double LigneDeCredit
         {
@@ -33,7 +30,7 @@ namespace Models
             }
         }
 
-        private double SoldeDisponible
+        protected override double SoldeDisponible
         {
             get { return  Solde + LigneDeCredit; }
         }
@@ -41,30 +38,7 @@ namespace Models
 
 
         #region Méthodes
-        public void Depot(double montant)
-        {
-            if(montant <= 0)
-            {
-                throw new Exception("Montant négatif");
-            }
 
-            Solde += montant;
-        }
-
-        public void Retrait(double montant)
-        {
-            if (montant <= 0)
-            {
-                throw new Exception("Montant négatif");
-            }
-
-            if (montant > SoldeDisponible)
-            {
-                throw new Exception("Solde insufisant");
-            }
-
-            Solde -= montant;
-        }
         #endregion
 
         #region Surcharge d'opérateur
