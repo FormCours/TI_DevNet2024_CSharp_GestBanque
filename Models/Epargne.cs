@@ -10,11 +10,18 @@ namespace Models
     public class Epargne : Compte
     {
         public DateTime DateDernierRetrait { get; private set; }
+        private const double TX_INTERET = 4.5;
 
         public override void Retrait(double montant)
         {
             base.Retrait(montant);
             DateDernierRetrait = DateTime.Now;
         }
+
+        protected override double CalculInteret()
+        {
+            return this.Solde * (TX_INTERET / 100);
+        }
+
     }
 }

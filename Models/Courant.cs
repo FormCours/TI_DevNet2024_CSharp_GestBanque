@@ -11,6 +11,8 @@ namespace Models
     {
         #region Champs
         private double _LigneDeCredit;
+        private const double TX_INTERET_POS = 3;
+        private const double TX_INTERET_NEG = 9.75;
         #endregion
 
         #region Propriétés
@@ -33,6 +35,22 @@ namespace Models
         protected override double SoldeDisponible
         {
             get { return  Solde + LigneDeCredit; }
+        }
+
+        protected override double CalculInteret()
+        {
+            double taux;
+            if (Solde >= 0)
+            {
+                taux = TX_INTERET_POS;
+            }
+            else
+            {
+                taux = TX_INTERET_NEG;
+            }
+            //double taux = Solde >= 0 ? TX_INTERET_POS : TX_INTERET_NEG;
+
+            return Solde * (taux / 100);
         }
         #endregion
 

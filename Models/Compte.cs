@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    public class Compte
+    public abstract class Compte
     {
         public string Numero { get; set; }
         public Personne Titulaire { get; set; }
@@ -43,6 +43,14 @@ namespace Models
 
             Solde -= montant;
         }
+
+        protected abstract double CalculInteret();
+
+        public void AppliquerInteret()
+        { 
+            Solde = Solde + CalculInteret();
+        }
+
 
         #region Surcharge d'opérateur
         // Surcharger l’opérateur « + » de la classe « Compte » afin qu’il retourne la somme, de type double, des soldes.
