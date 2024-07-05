@@ -21,7 +21,7 @@ namespace Models
             // La ligne de credit est négative, car si la banque autorise un credit de 500€, cela signifie que le client peut retiré jusqu'a un solde de -500€.
 
             get { return _LigneDeCredit; }
-            set 
+            private set
             { 
                 if(value < 0)
                 {
@@ -36,6 +36,29 @@ namespace Models
             get { return  Solde + LigneDeCredit; }
         }
 
+        #endregion
+
+        #region Constructeurs
+
+        public Courant(string numero, Personne titulaire) : base(numero, titulaire)
+        {
+            LigneDeCredit = 0;
+        }
+
+        public Courant(string numero, Personne titulaire, double ligneDeCredit) : base(numero, titulaire)
+        {
+            LigneDeCredit = ligneDeCredit;
+        }
+
+        public Courant(string numero, Personne titulaire, double solde, double ligneDeCredit) : base(numero, titulaire, solde)
+        {
+            LigneDeCredit = ligneDeCredit;
+        }
+
+        #endregion
+
+
+        #region Méthodes
         protected override double CalculInteret()
         {
             double taux;
@@ -52,10 +75,5 @@ namespace Models
             return Solde * (taux / 100);
         }
         #endregion
-
-
-        #region Méthodes
-
-        #endregion    
     }
 }

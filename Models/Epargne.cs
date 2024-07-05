@@ -14,7 +14,20 @@ namespace Models
         #endregion
 
         #region Propriétés
-        public DateTime DateDernierRetrait { get; private set; }
+        public DateTime? DateDernierRetrait { get; private set; }
+        #endregion
+
+        #region Constructeur
+        public Epargne(string numero, Personne titulaire) : base(numero, titulaire)
+        {
+            DateDernierRetrait = null;
+        }
+
+        public Epargne(string numero, Personne titulaire, double solde, DateTime? dateDernierRetrait) : base(numero, titulaire, solde)
+        {
+            DateDernierRetrait = dateDernierRetrait;
+        }
+
         #endregion
 
         #region Méthodes

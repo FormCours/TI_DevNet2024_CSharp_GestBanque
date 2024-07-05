@@ -10,12 +10,26 @@ namespace Models
     public abstract class Compte : ICustomer, IBanker
     {
         #region Propriétés
-        public string Numero { get; set; }
-        public Personne Titulaire { get; set; }
+        public string Numero { get; private set; }
+        public Personne Titulaire { get; private set; }
         public double Solde { get; private set; }
         protected virtual double SoldeDisponible
         {
             get { return Solde; }
+        }
+        #endregion
+
+        #region Constructeurs
+        public Compte(string numero, Personne titulaire)
+        {
+            Titulaire = titulaire;
+            Numero = numero;
+            Solde = 0;
+        }
+        public Compte(string numero, Personne titulaire, double solde)
+            : this(numero, titulaire)
+        {
+            Solde = solde;
         }
         #endregion
 

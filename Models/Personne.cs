@@ -8,11 +8,19 @@ namespace Models
 {
     public class Personne
     {
+        
         #region Propriétés
-        public string Prenom { get; set; }
-        public string Nom { get; set; }
-        public DateTime DateNaiss { get; set; }
+        public string Prenom { get; private set; }
+        public string Nom { get; private set; }
+        public DateTime DateNaiss { get; private set; }
         #endregion
+
+        public Personne(string prenom, string nom, DateTime dateNaiss)
+        {
+            Prenom = prenom;
+            Nom = nom;
+            DateNaiss = dateNaiss;
+        }
 
 
         #region Surchage d'opérateur

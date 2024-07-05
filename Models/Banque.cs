@@ -56,7 +56,7 @@ namespace Models
         public double AvoirDesComptes(Personne titulaire)
         {
             // Ajouter une méthode « AvoirDesComptes » à la classe « Banque » recevant en paramètre le titulaire (Personne) qui calculera les avoirs de tous ses comptes en utilisant l’opérateur « + ».
-            Compte temp = new Courant();
+            Compte temp = new Courant("test", titulaire);
             double result = 0;
 
             foreach (KeyValuePair<string, Compte> kvp in _Comptes)
