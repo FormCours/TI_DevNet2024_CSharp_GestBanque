@@ -9,18 +9,17 @@ namespace Models
 {
     public abstract class Compte : ICustomer, IBanker
     {
+        #region Propriétés
         public string Numero { get; set; }
         public Personne Titulaire { get; set; }
         public double Solde { get; private set; }
-
         protected virtual double SoldeDisponible
         {
-            get
-            {
-                return Solde;
-            }
+            get { return Solde; }
         }
+        #endregion
 
+        #region Méthodes
         public void Depot(double montant)
         {
             if (montant <= 0)
@@ -52,7 +51,7 @@ namespace Models
         {
             Solde = Solde + CalculInteret();
         }
-
+        #endregion
 
         #region Surcharge d'opérateur
         // Surcharger l’opérateur « + » de la classe « Compte » afin qu’il retourne la somme, de type double, des soldes.
@@ -85,6 +84,5 @@ namespace Models
         //    return c1.Solde + c2.Solde;
         //}
         #endregion  
-
     }
 }

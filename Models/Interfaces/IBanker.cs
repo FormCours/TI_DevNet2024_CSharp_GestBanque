@@ -8,8 +8,9 @@ namespace Models.Interfaces
 {
     public interface IBanker : ICustomer
     {
-       void AppliquerInteret();
        string Numero { get; }
        Personne Titulaire { get;}
+
+       void AppliquerInteret();
     }
 }

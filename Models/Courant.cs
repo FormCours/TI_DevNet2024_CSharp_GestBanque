@@ -16,7 +16,6 @@ namespace Models
         #endregion
 
         #region Propriétés
-
         public double LigneDeCredit
         {
             // La ligne de credit est négative, car si la banque autorise un credit de 500€, cela signifie que le client peut retiré jusqu'a un solde de -500€.
@@ -57,38 +56,6 @@ namespace Models
 
         #region Méthodes
 
-        #endregion
-
-        #region Surcharge d'opérateur
-        // Surcharger l’opérateur « + » de la classe « Courant » afin qu’il retourne la somme, de type double, des soldes.
-        // Cependant, les soldes négatifs ne doivent pas être pris en compte.
-        public static double operator +(Courant c1, Courant c2)
-        {
-            double solde1 = Math.Max(c1.Solde, 0);
-            double solde2 = Math.Max(c2.Solde, 0);
-
-            return solde1 + solde2;
-        }
-
-        //public static double operator +(Courant c1, Courant c2)
-        //{
-        //    if (c1.Solde <= 0 && c2.Solde <= 0)
-        //    {
-        //        return 0;
-        //    }
-        //
-        //    if (c1.Solde <= 0)
-        //    {
-        //        return c2.Solde;
-        //    }
-        //
-        //    if (c2.Solde <= 0)
-        //    {
-        //        return c1.Solde;
-        //    }
-        //
-        //    return c1.Solde + c2.Solde;
-        //}
-        #endregion       
+        #endregion    
     }
 }

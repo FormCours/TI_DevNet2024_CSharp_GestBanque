@@ -14,7 +14,8 @@ namespace Models
         public DateTime DateNaiss { get; set; }
         #endregion
 
-        
+
+        #region Surchage d'opérateur
         public static bool operator ==(Personne? pLeft, Personne? pRight)
         {
             if (pLeft is null && pRight is null)
@@ -32,5 +33,6 @@ namespace Models
         {
             return !(pLeft == pRight);
         }
+        #endregion
     }
 }

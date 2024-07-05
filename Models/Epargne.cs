@@ -9,9 +9,15 @@ namespace Models
 {
     public class Epargne : Compte
     {
-        public DateTime DateDernierRetrait { get; private set; }
+        #region Champs
         private const double TX_INTERET = 4.5;
+        #endregion
 
+        #region Propriétés
+        public DateTime DateDernierRetrait { get; private set; }
+        #endregion
+
+        #region Méthodes
         public override void Retrait(double montant)
         {
             base.Retrait(montant);
@@ -22,6 +28,6 @@ namespace Models
         {
             return this.Solde * (TX_INTERET / 100);
         }
-
+        #endregion
     }
 }
