@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Models.Interfaces;
 
 namespace Models
 {
-    public abstract class Compte
+    public abstract class Compte : ICustomer, IBanker
     {
         public string Numero { get; set; }
         public Personne Titulaire { get; set; }
         public double Solde { get; private set; }
 
-        protected virtual double SoldeDisponible {
+        protected virtual double SoldeDisponible
+        {
             get
             {
                 return Solde;
@@ -47,7 +49,7 @@ namespace Models
         protected abstract double CalculInteret();
 
         public void AppliquerInteret()
-        { 
+        {
             Solde = Solde + CalculInteret();
         }
 

@@ -1,4 +1,5 @@
 ﻿using Models;
+using Models.Interfaces;
 
 Personne p1 = new Personne();
 p1.Nom = "Bya";
@@ -9,6 +10,11 @@ Personne p2 = new Personne();
 p2.Nom = "Caffey";
 p2.Prenom = "John";
 p2.DateNaiss = new DateTime(1970, 3, 27);
+
+Personne p3 = new Personne();
+p3.Nom = "Della";
+p3.Prenom = "Duck";
+p3.DateNaiss = new DateTime(1989, 6, 7);
 
 //p1.Prenom = p2.Prenom;
 //p1.SetPrenom(p2.GetPrenom());
@@ -51,3 +57,13 @@ pRechercher.DateNaiss = new DateTime(1991, 3, 27);
 
 double avoirSeb = b1.AvoirDesComptes(pRechercher);
 Console.WriteLine($"Avoir des comptes de {pRechercher.Prenom} {pRechercher.Nom} est de {avoirSeb}.");
+
+ICustomer customer = c3;
+customer.Depot(25.00);
+// On ne peut ni y accéder ni modifier le titulaire via l'interface ICustomer :)
+
+// Cela est possible uniquement en repassant par un type permettant d'utiliser le "Set"
+if(customer is Compte)
+{
+    ((Compte)customer).Titulaire = p3;
+}
