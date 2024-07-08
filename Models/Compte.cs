@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Models.CustomExceptions;
 using Models.Interfaces;
 
 namespace Models
@@ -38,7 +39,7 @@ namespace Models
         {
             if (montant <= 0)
             {
-                throw new Exception("Montant négatif");
+                throw new ArgumentOutOfRangeException(nameof(montant), "Montant négatif");
             }
 
             Solde += montant;
@@ -48,12 +49,12 @@ namespace Models
         {
             if (montant <= 0)
             {
-                throw new Exception("Montant négatif");
+                throw new ArgumentOutOfRangeException(nameof(montant), "Montant négatif");
             }
 
             if (montant > SoldeDisponible)
             {
-                throw new Exception("Solde insufisant");
+                throw new SoldeInsuffisantException(this, montant, "Ca va pété !");
             }
 
             Solde -= montant;

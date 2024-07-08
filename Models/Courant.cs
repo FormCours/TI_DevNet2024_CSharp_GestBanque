@@ -25,7 +25,7 @@ namespace Models
             { 
                 if(value < 0)
                 {
-                    throw new Exception("Ligne de credit négative");
+                    throw new InvalidOperationException("Ligne de credit négative");
                 }
                 _LigneDeCredit = value; 
             }

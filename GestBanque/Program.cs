@@ -1,4 +1,5 @@
 ﻿using Models;
+using Models.CustomExceptions;
 using Models.Interfaces;
 
 Personne p1 = new Personne("Sébastien", "Bya", new DateTime(1991, 3, 27));
@@ -52,3 +53,54 @@ if(customer is Courant customerCourant)
     customer.Retrait(customerCourant.Solde);
     b1.Ajouter(c4);
 }
+
+
+Console.WriteLine();
+Console.WriteLine("Interaction utilisateur (Risque de plantage :o)");
+bool faireNouelleOperation = false;
+do
+{
+    Console.Write("Votre numéro de compte : ");
+    string nbCompte = Console.ReadLine()!;
+
+    Compte? target = b1[nbCompte];
+    if(target != null)
+    {
+        try
+        {
+            Console.Write("Combien voulez vous retirer : ");
+            double montantRetrait = double.Parse(Console.ReadLine()!);
+
+            target.Retrait(montantRetrait);
+        }
+        catch(SoldeInsuffisantException ex)
+        {
+            Console.WriteLine($"Le retrait sur le compte {ex.Numero} de {ex.Montant} euros n'est pas autorisé !");
+        }
+        catch(FormatException ex)
+        {
+            Console.WriteLine("Votre saisie est invalide...");
+            if(target.Solde > 0)
+            {
+                target.Retrait(1);
+            }
+        }
+        catch(Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+        finally
+        {
+            Console.WriteLine("Opération terminé !");
+        }
+    }
+    else
+    {
+        Console.WriteLine("Compte Non trouvé :(");
+    }
+    Console.WriteLine();
+
+    Console.WriteLine("Nouvelle opération ? (true/false)");
+    bool.TryParse(Console.ReadLine()!, out faireNouelleOperation);
+}
+while(faireNouelleOperation);
