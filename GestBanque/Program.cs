@@ -26,6 +26,11 @@ c3.Retrait(100);
 Banque b1 = new Banque();
 b1.Nom = "Les loustics";
 
+b1.BanqueNotifEvent += (message) =>
+{
+    Console.WriteLine($"Notif Banque : {message}");
+};
+
 b1.Ajouter(c1);
 b1.Ajouter(c2);
 b1.Ajouter(c3);

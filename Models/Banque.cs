@@ -8,6 +8,17 @@ namespace Models
 {
     public class Banque
     {
+        #region Event
+        // On souhaite utiliser le delegué suivant : void DelegateEvent(string message)
+        // Pour cela, on peut utiliser un des delegué générique prévu par le framework
+        public event Action<string>? BanqueNotifEvent = null;
+
+        protected void RaiseBanqueNotifEvent(string message)
+        {
+            BanqueNotifEvent?.Invoke(message);
+        }
+        #endregion
+
         #region Champs
         private Dictionary<string, Compte> _Comptes = new Dictionary<string, Compte>();
         #endregion
@@ -35,10 +46,11 @@ namespace Models
         {
             if (this[c.Numero] != null)
             {
-                Console.WriteLine($"Le compte numéro : {c.Numero} existe déjà!!!");
+                RaiseBanqueNotifEvent($"Le compte numéro : {c.Numero} existe déjà!!!");
                 return;
             }
 
+            // Ajout du compte dans la banque
             _Comptes.Add(c.Numero, c);
 
             // Abonnement a l'event des comptes
@@ -47,17 +59,21 @@ namespace Models
 
         private void DetectionComptePasseEnNegatif(Compte compte)
         {
-            Console.WriteLine($"Le compte Numero {compte.Numero} vient de passer en négatif");
+            RaiseBanqueNotifEvent($"Le compte Numero {compte.Numero} vient de passer en négatif");
         }
 
         public void Supprimer(string numero)
         {
             if (!_Comptes.ContainsKey(numero))
             {
-                Console.WriteLine($"Le compte numéro : {numero} n'existe pas!!!");
+                RaiseBanqueNotifEvent($"Le compte numéro : {numero} n'existe pas!!!");
                 return;
             }
 
+            // Déabonnement de l'event des comptes
+            _Comptes[numero].PassageEnNegatifEvent -= DetectionComptePasseEnNegatif;
+
+            // Suppression du compte
             _Comptes.Remove(numero);
         }
 
