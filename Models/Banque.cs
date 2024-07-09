@@ -40,6 +40,14 @@ namespace Models
             }
 
             _Comptes.Add(c.Numero, c);
+
+            // Abonnement a l'event des comptes
+            c.PassageEnNegatifEvent += DetectionComptePasseEnNegatif;
+        }
+
+        private void DetectionComptePasseEnNegatif(Compte compte)
+        {
+            Console.WriteLine($"Le compte Numero {compte.Numero} vient de passer en négatif");
         }
 
         public void Supprimer(string numero)

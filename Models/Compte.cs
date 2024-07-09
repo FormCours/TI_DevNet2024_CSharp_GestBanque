@@ -5,11 +5,28 @@ using System.Text;
 using System.Threading.Tasks;
 using Models.CustomExceptions;
 using Models.Interfaces;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Models
 {
+    public delegate void PassageEnNegatifDelegate(Compte compte);
+
     public abstract class Compte : ICustomer, IBanker
     {
+        #region Event
+        public event PassageEnNegatifDelegate? PassageEnNegatifEvent = null;
+
+        protected void RaisePassageEnNegatifEvent()
+        {
+            // if(PassageEnNegatifEvent != null)
+            // {
+            //     PassageEnNegatifEvent(this);
+            // }
+
+            PassageEnNegatifEvent?.Invoke(this);
+        }
+        #endregion
+
         #region Propriétés
         public string Numero { get; private set; }
         public Personne Titulaire { get; private set; }

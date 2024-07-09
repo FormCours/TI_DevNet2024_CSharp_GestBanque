@@ -22,18 +22,18 @@ namespace Models
 
             get { return _LigneDeCredit; }
             private set
-            { 
-                if(value < 0)
+            {
+                if (value < 0)
                 {
                     throw new InvalidOperationException("Ligne de credit négative");
                 }
-                _LigneDeCredit = value; 
+                _LigneDeCredit = value;
             }
         }
 
         protected override double SoldeDisponible
         {
-            get { return  Solde + LigneDeCredit; }
+            get { return Solde + LigneDeCredit; }
         }
 
         #endregion
@@ -59,6 +59,18 @@ namespace Models
 
 
         #region Méthodes
+        public override void Retrait(double montant)
+        {
+            bool soldeInitialPositif = (Solde >= 0);
+
+            base.Retrait(montant);
+
+            if (soldeInitialPositif && Solde < 0)
+            {
+                RaisePassageEnNegatifEvent();
+            }
+        }
+
         protected override double CalculInteret()
         {
             double taux;
