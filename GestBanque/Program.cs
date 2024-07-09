@@ -91,7 +91,7 @@ do
         }
         finally
         {
-            Console.WriteLine("Opération terminé !");
+            Console.WriteLine("Opération terminée !");
         }
     }
     else
@@ -104,3 +104,5 @@ do
     bool.TryParse(Console.ReadLine()!, out faireNouelleOperation);
 }
 while(faireNouelleOperation);
+
+
