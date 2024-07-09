@@ -9,12 +9,10 @@ using static System.Net.Mime.MediaTypeNames;
 
 namespace Models
 {
-    public delegate void PassageEnNegatifDelegate(Compte compte);
-
     public abstract class Compte : ICustomer, IBanker
     {
         #region Event
-        public event PassageEnNegatifDelegate? PassageEnNegatifEvent = null;
+        public event Action<Compte>? PassageEnNegatifEvent = null;
 
         protected void RaisePassageEnNegatifEvent()
         {
